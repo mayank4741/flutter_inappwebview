@@ -112,7 +112,7 @@ public class Util {
 
   @Nullable
   public static PrivateKeyAndCertificates loadPrivateKeyAndCertificate(@NonNull InAppWebViewFlutterPlugin plugin,
-                                                                       @NonNull String certificatePath, 
+                                                                       @NonNull String certificatePath,
                                                                        @Nullable String certificatePassword,
                                                                        @NonNull String keyStoreType) {
     PrivateKeyAndCertificates privateKeyAndCertificates = null;
