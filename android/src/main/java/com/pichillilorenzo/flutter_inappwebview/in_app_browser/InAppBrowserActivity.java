@@ -54,7 +54,7 @@ import io.flutter.plugin.common.MethodChannel;
 public class InAppBrowserActivity extends AppCompatActivity implements InAppBrowserDelegate, Disposable {
   protected static final String LOG_TAG = "InAppBrowserActivity";
   public static final String METHOD_CHANNEL_NAME_PREFIX = "com.pichillilorenzo/flutter_inappbrowser_";
-  
+
   @Nullable
   public Integer windowId;
   public String id;
@@ -111,7 +111,7 @@ public class InAppBrowserActivity extends AppCompatActivity implements InAppBrow
     pullToRefreshLayout.channelDelegate = new PullToRefreshChannelDelegate(pullToRefreshLayout, pullToRefreshLayoutChannel);
     pullToRefreshLayout.settings = pullToRefreshSettings;
     pullToRefreshLayout.prepare();
-    
+
     webView = findViewById(R.id.webView);
     webView.id = id;
     webView.windowId = windowId;

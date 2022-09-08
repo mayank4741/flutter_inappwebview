@@ -38,7 +38,7 @@ import io.flutter.plugin.common.MethodChannel;
 public class ChromeCustomTabsActivity extends Activity implements Disposable {
   protected static final String LOG_TAG = "CustomTabsActivity";
   public static final String METHOD_CHANNEL_NAME_PREFIX = "com.pichillilorenzo/flutter_chromesafaribrowser_";
-  
+
   public String id;
   @Nullable
   public CustomTabsIntent.Builder builder;
@@ -241,7 +241,7 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
     }
 
     for (CustomTabsMenuItem menuItem : menuItems) {
-      builder.addMenuItem(menuItem.getLabel(), 
+      builder.addMenuItem(menuItem.getLabel(),
               createPendingIntent(menuItem.getId()));
     }
 
