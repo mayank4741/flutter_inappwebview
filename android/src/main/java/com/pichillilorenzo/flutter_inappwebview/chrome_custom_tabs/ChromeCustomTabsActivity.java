@@ -71,6 +71,17 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    if(!BuildConfig.DEBUG) {
+      SharedPreferences preferences = context.getSharedPreferences(FLAG_SECURE_PREFS, Context.MODE_PRIVATE);
+      if (preferences != null) {
+        boolean secureFlag = preferences.getBoolean(FLAG_SECURE_VALUE, true);
+        if(secureFlag)
+          getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
+      } else {
+        getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
+      }
+    }
+
     setContentView(R.layout.chrome_custom_tabs_layout);
 
     Bundle b = getIntent().getExtras();
