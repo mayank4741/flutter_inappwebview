@@ -82,16 +82,7 @@ public class InAppBrowserActivity extends AppCompatActivity implements InAppBrow
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    if(!BuildConfig.DEBUG) {
-      SharedPreferences preferences = context.getSharedPreferences(FLAG_SECURE_PREFS, Context.MODE_PRIVATE);
-      if (preferences != null) {
-        boolean secureFlag = preferences.getBoolean(FLAG_SECURE_VALUE, true);
-        if(secureFlag)
-          getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
-      } else {
-        getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
-      }
-    }
+    getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
 
     Bundle b = getIntent().getExtras();
     if (b == null) return;
