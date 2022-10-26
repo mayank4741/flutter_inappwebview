@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.RemoteViews;
 
 import androidx.annotation.CallSuper;
@@ -71,7 +72,7 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
     setContentView(R.layout.chrome_custom_tabs_layout);
 
