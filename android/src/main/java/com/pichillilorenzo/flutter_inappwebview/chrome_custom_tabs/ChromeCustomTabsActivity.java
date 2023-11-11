@@ -49,6 +49,7 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
   protected final int CHROME_CUSTOM_TAB_REQUEST_CODE = 100;
   protected boolean onOpened = false;
   protected boolean onCompletedInitialLoad = false;
+  protected boolean isBindSuccess = false;
   @Nullable
   public ChromeSafariBrowserManager manager;
   @Nullable
@@ -202,7 +203,8 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
 
   public void customTabsConnected() {
     customTabsSession = customTabActivityHelper.getSession();
-    if (initialUrl != null) {
+    // avoid webpage reopen if isBindSuccess is false: onServiceConnected->launchUrl
+    if (isBindSuccess && initialUrl != null) {
       launchUrl(initialUrl, initialHeaders, initialReferrer, initialOtherLikelyURLs);
     }
   }
@@ -339,16 +341,11 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
   @Override
   protected void onStart() {
     super.onStart();
-    boolean isBindSuccess = customTabActivityHelper.bindCustomTabsService(this);
+    isBindSuccess = customTabActivityHelper.bindCustomTabsService(this);
 
-    if (!isBindSuccess) {
+    if (!isBindSuccess && initialUrl != null) {
       // chrome process not running, start tab directly
-
-      if (initialUrl != null) {
-        launchUrlWithSession(null, initialUrl, initialHeaders, initialReferrer, initialOtherLikelyURLs);
-        //avoid webpage reopen: onServiceConnected->launchUrl
-        initialUrl = null;
-      }
+      launchUrlWithSession(null, initialUrl, initialHeaders, initialReferrer, initialOtherLikelyURLs);
     }
   }
 
@@ -356,6 +353,7 @@ public class ChromeCustomTabsActivity extends Activity implements Disposable {
   protected void onStop() {
     super.onStop();
     customTabActivityHelper.unbindCustomTabsService(this);
+    isBindSuccess = false;
   }
 
   @Override
